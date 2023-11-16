@@ -18,7 +18,7 @@ import sys
 import errno
 import math
 
-from einops import rearrange, repeat
+# from einops import rearrange, repeat
 from copy import deepcopy
 
 from common.camera import *
@@ -587,6 +587,7 @@ if args.render:
                              pad=pad, causal_shift=causal_shift, augment=args.test_time_augmentation,
                              kps_left=kps_left, kps_right=kps_right, joints_left=joints_left, joints_right=joints_right)
     prediction = evaluate(gen, return_predictions=True)
+    prediction = prediction.squeeze()
     # if model_traj is not None and ground_truth is None:
     #     prediction_traj = evaluate(gen, return_predictions=True, use_trajectory_model=True)
     #     prediction += prediction_traj
