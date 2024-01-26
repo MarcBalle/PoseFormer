@@ -13,9 +13,8 @@ plot_skeleton = False
 plot_3dskeleton = True
 
 data = np.load("prediction.npz")["data"][0]
-fig, axs = plt.subplots(3, 6)
-fig.set_figheight(18)
-fig.set_figwidth(18)
+# Hip joint is center of coordinates
+data[:] -= data[:1]
 
 skeleton = [
     [0, 1],
@@ -37,6 +36,9 @@ skeleton = [
 ]
 
 if plot_scatter:
+    fig, axs = plt.subplots(3, 6)
+    fig.set_figheight(18)
+    fig.set_figwidth(18)
     for i, ax in enumerate(axs.reshape(-1)):
         if i < data.shape[0]:
             ax.set_xlim(0, 960)
@@ -46,7 +48,7 @@ if plot_scatter:
     plt.savefig("scatter_keypoints_notnorm.png")
     plt.clf()
 
-if plot_3dskeleton:
+if plot_skeleton:
     fig = plt.figure()
     for joint in skeleton:
         plt.scatter(data[:, 0], data[:, 1])
@@ -70,4 +72,4 @@ if plot_3dskeleton:
         )
     plt.show()
 
-    plt.savefig("3dskeleton.png")
+    # plt.savefig("3dskeleton.png")
