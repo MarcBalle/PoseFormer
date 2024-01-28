@@ -12,9 +12,19 @@ plot_scatter = False
 plot_skeleton = False
 plot_3dskeleton = True
 
+angle_x = 0 * (np.pi / 180)
+angle_y = 0 * (np.pi / 180)
+angle_z = 0 * (np.pi / 180)
+
+rot_x = np.array([[1, 0, 0], [0, np.cos(angle_x), -np.sin(angle_x)], [0, np.sin(angle_x), np.cos(angle_x)]])
+rot_y = np.array([[np.cos(angle_y), 0, np.sin(angle_y)], [0, 1, 0], [-np.sin(angle_y), 0, np.cos(angle_y)]])
+rot_z = np.array([[np.cos(angle_z), -np.sin(angle_z), 0], [np.sin(angle_z), np.cos(angle_z), 0], [0, 0, 1]])
+
 data = np.load("prediction.npz")["data"][0]
 # Hip joint is center of coordinates
 data[:] -= data[:1]
+
+data = data @ rot_x.T @ rot_y.T @ rot_z.T
 
 skeleton = [
     [0, 1],
