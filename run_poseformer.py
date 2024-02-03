@@ -82,6 +82,7 @@ for subject in dataset.subjects():
 print("Loading 2D detections...")
 keypoints = np.load("data/data_2d_" + args.dataset + "_" + args.keypoints + ".npz", allow_pickle=True)
 keypoints_metadata = keypoints["metadata"].item()
+keypoints_metadata.update(layout_name="h36m")  # Need to add this for rendering
 keypoints_symmetry = keypoints_metadata["keypoints_symmetry"]
 kps_left, kps_right = list(keypoints_symmetry[0]), list(keypoints_symmetry[1])
 joints_left, joints_right = list(dataset.skeleton().joints_left()), list(dataset.skeleton().joints_right())
