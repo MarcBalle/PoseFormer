@@ -2,3 +2,4 @@ data
 .vscode
 common/__pycache__
 checkpoint
+output
