@@ -59,10 +59,10 @@ def get_fps(filename):
 def read_video(filename, skip=0, limit=-1):
     # w, h = get_resolution(filename)
     # TODO: do not hardcode resolutions!!
-    # w = 1000
-    # h = 1002
-    w = 960
-    h = 540
+    w = 1000
+    h = 1002
+    # w = 960
+    # h = 540
 
     command = [
         "ffmpeg",
@@ -244,9 +244,10 @@ def render_animation(
                 if j_parent == -1:
                     continue
 
-                """ if len(parents) == keypoints.shape[1] and keypoints_metadata['layout_name'] != 'coco':
-                    lines[j - 1][0].set_data([keypoints[i, j, 0], keypoints[i, j_parent, 0]],
-                                             [keypoints[i, j, 1], keypoints[i, j_parent, 1]]) """
+                if len(parents) == keypoints.shape[1] and keypoints_metadata["layout_name"] != "coco":
+                    lines[j - 1][0].set_data(
+                        [keypoints[i, j, 0], keypoints[i, j_parent, 0]], [keypoints[i, j, 1], keypoints[i, j_parent, 1]]
+                    )
 
                 for n, ax in enumerate(ax_3d):
                     pos = poses[n][i]
