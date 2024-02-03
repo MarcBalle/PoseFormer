@@ -1,5 +1,6 @@
 data
 .vscode
-common/__pycache__
+**/__pycache__/
 checkpoint
 output
+output_extra
