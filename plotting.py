@@ -2,8 +2,8 @@
 
 First for loop plots joints one by one in order to check the order of the joints in the array
 Second for loop plots the skeleton following the Human3.6M convention. 
+Third for loop for plotting the 3D skeleton.
 """
-
 
 import matplotlib.pyplot as plt
 import numpy as np
@@ -12,17 +12,17 @@ plot_scatter = False
 plot_skeleton = False
 plot_3dskeleton = True
 
-angle_x = 0 * (np.pi / 180)
-angle_y = 0 * (np.pi / 180)
-angle_z = 0 * (np.pi / 180)
+angle_x = 50 * (np.pi / 180)
+angle_y = 140 * (np.pi / 180)
+angle_z = -50 * (np.pi / 180)
 
 rot_x = np.array([[1, 0, 0], [0, np.cos(angle_x), -np.sin(angle_x)], [0, np.sin(angle_x), np.cos(angle_x)]])
 rot_y = np.array([[np.cos(angle_y), 0, np.sin(angle_y)], [0, 1, 0], [-np.sin(angle_y), 0, np.cos(angle_y)]])
 rot_z = np.array([[np.cos(angle_z), -np.sin(angle_z), 0], [np.sin(angle_z), np.cos(angle_z), 0], [0, 0, 1]])
 
-data = np.load("prediction.npz")["data"][0]
+data = np.load("data\\mhformer_predictions_S9_Directions1_cam0_original.npz")["data"][0]
 # Hip joint is center of coordinates
-data[:] -= data[:1]
+data[:] -= data[0]
 
 data = data @ rot_x.T @ rot_y.T @ rot_z.T
 
